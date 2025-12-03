@@ -40,11 +40,18 @@ jobs:
         PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -o 'userPWD="[^"]*"' | head -1 | cut -d'"' -f2)
         
         echo "Deploying to Azure..."
-        curl -X POST \
+        response=$(curl -s -w "\n%{http_code}" -X POST \
           -u "$USERNAME:$PASSWORD" \
           --data-binary @release.zip \
-          "https://${{ env.AZURE_WEBAPP_NAME }}.scm.azurewebsites.net/api/zipdeploy?isAsync=true" \
-          -H "Content-Type: application/zip" \
-          --fail
+          "https://${{ env.AZURE_WEBAPP_NAME }}.scm.azurewebsites.net/api/zipdeploy" \
+          -H "Content-Type: application/zip")
         
-        echo "Deployment initiated!"
+        http_code=$(echo "$response" | tail -n1)
+        echo "HTTP Status: $http_code"
+        
+        if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
+          echo "Deployment successful!"
+        else
+          echo "Deployment response: $response"
+          exit 1
+        fi
