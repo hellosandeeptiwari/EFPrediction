@@ -1,0 +1,197 @@
+<%- include('layout', { 
+    body: `
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-2">
+                <i class="bi bi-speedometer2 text-primary me-2"></i>
+                Enrollment Form Prediction Dashboard
+            </h1>
+            <p class="text-muted mb-4">
+                HCP Enrollment Predictions - Machine Learning Scoring Results
+            </p>
+        </div>
+    </div>
+
+    <!-- Summary Stats Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card stats-card border-0 shadow-sm h-100 bg-primary text-white" data-bs-toggle="tooltip" title="Total number of Healthcare Providers scored by the ML model">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1 opacity-75">Total HCPs Scored</h6>
+                            <h2 class="mb-0" id="total-hcps">--</h2>
+                        </div>
+                        <i class="bi bi-people display-4 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card stats-card border-0 shadow-sm h-100 bg-success text-white" data-bs-toggle="tooltip" title="HCPs predicted to have HIGH enrollment potential (probability > 50%). These are priority targets for outreach.">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1 opacity-75">High Potential</h6>
+                            <h2 class="mb-0" id="high-potential">--</h2>
+                        </div>
+                        <i class="bi bi-arrow-up-circle display-4 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card stats-card border-0 shadow-sm h-100 bg-warning text-dark" data-bs-toggle="tooltip" title="HCPs predicted to have LOW enrollment potential (probability < 50%). May need different engagement strategies.">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1 opacity-75">Low Potential</h6>
+                            <h2 class="mb-0" id="low-potential">--</h2>
+                        </div>
+                        <i class="bi bi-arrow-down-circle display-4 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card stats-card border-0 shadow-sm h-100 bg-info text-white" data-bs-toggle="tooltip" title="Average enrollment probability across all scored HCPs. Higher average indicates better overall targeting potential.">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1 opacity-75">Avg Probability</h6>
+                            <h2 class="mb-0" id="avg-prob">--</h2>
+                        </div>
+                        <i class="bi bi-percent display-4 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-transparent">
+            <h5 class="mb-0"><i class="bi bi-funnel me-2"></i>Filters</h5>
+        </div>
+        <div class="card-body">
+            <form id="filter-form" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">HCP Segment</label>
+                    <select class="form-select" id="filter-segment">
+                        <option value="">All Segments</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Region</label>
+                    <select class="form-select" id="filter-region">
+                        <option value="">All Regions</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Risk Tier</label>
+                    <select class="form-select" id="filter-risk">
+                        <option value="">All Tiers</option>
+                        <option value="Very High">Very High</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Min Probability</label>
+                    <input type="number" class="form-control" id="filter-min-prob" step="0.1" min="0" max="1" placeholder="e.g., 0.5">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="bi bi-search me-1"></i>Apply Filters
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" id="reset-filters">
+                        <i class="bi bi-x-circle me-1"></i>Reset
+                    </button>
+                    <button type="button" class="btn btn-outline-success float-end" id="export-csv">
+                        <i class="bi bi-download me-1"></i>Export CSV
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- HCP Predictions Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-table me-2"></i>HCP Enrollment Predictions</h5>
+            <div>
+                <span class="badge bg-secondary" id="showing-count">Showing 0 records</span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0" id="predictions-table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="sortable" data-sort="hcp_id" data-bs-toggle="tooltip" title="Unique Healthcare Provider Identifier">HCP ID <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="hcp_segment" data-bs-toggle="tooltip" title="HCP Classification: Writer (active prescriber), Potential Writer, or Lapsed Writer (previously prescribed)">Segment <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="territory_name" data-bs-toggle="tooltip" title="Sales territory where the HCP is located">Territory <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="region_name" data-bs-toggle="tooltip" title="Geographic region (NORTHEAST, SOUTHEAST, Midwest, etc.)">Region <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="power_score" data-bs-toggle="tooltip" title="Composite score measuring HCP influence and prescribing potential. Higher = more influential. Range: -100 to +100">Power Score <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="probability" data-bs-toggle="tooltip" title="ML model probability of enrollment form submission. 0% = unlikely, 100% = very likely">Probability <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="prediction" data-bs-toggle="tooltip" title="Binary prediction: High (likely to submit enrollment) or Low (unlikely)">Prediction <i class="bi bi-chevron-expand"></i></th>
+                            <th class="sortable" data-sort="risk_tier" data-bs-toggle="tooltip" title="Risk category based on probability: Very High (>70%), High (50-70%), Medium (30-50%), Low (<30%)">Risk Tier <i class="bi bi-chevron-expand"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="predictions-body">
+                        <tr>
+                            <td colspan="8" class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-muted">Loading predictions...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer bg-transparent">
+            <nav>
+                <ul class="pagination mb-0 justify-content-center" id="pagination">
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Risk Tier Breakdown Chart -->
+    <div class="row g-4 mt-3">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0"><i class="bi bi-pie-chart me-2 text-info"></i>Risk Tier Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskTierChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0"><i class="bi bi-bar-chart me-2 text-success"></i>Predictions by Segment</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="segmentChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    `,
+    scripts: `<script src="/js/dashboard.js"></script>
+    <script>
+        // Initialize Bootstrap tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(el) {
+                return new bootstrap.Tooltip(el, { placement: 'top', html: true });
+            });
+        });
+    </script>`
+}) %>

@@ -1,0 +1,197 @@
+<%- include('layout', { 
+    body: `
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="bi bi-bullseye text-primary me-2"></i>
+                Make Prediction
+            </h1>
+            <p class="lead text-muted">
+                Enter HCP/Territory details to predict enrollment probability
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Prediction Form -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0"><i class="bi bi-input-cursor-text me-2"></i>Input Features</h5>
+                </div>
+                <div class="card-body">
+                    <form id="prediction-form">
+                        <!-- HCP Information -->
+                        <h6 class="text-primary mb-3"><i class="bi bi-person-badge me-2"></i>HCP Information</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">HCP ID</label>
+                                <input type="text" class="form-control" name="hcp_id" placeholder="Enter HCP ID">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Segment <span class="text-danger">*</span></label>
+                                <select class="form-select" name="segment" required>
+                                    <option value="">Select segment...</option>
+                                    <option value="HIGH">High Priority</option>
+                                    <option value="MEDIUM">Medium Priority</option>
+                                    <option value="LOW">Low Priority</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Specialty</label>
+                                <select class="form-select" name="specialty">
+                                    <option value="">Select specialty...</option>
+                                    <option value="GASTROENTEROLOGY">Gastroenterology</option>
+                                    <option value="HEPATOLOGY">Hepatology</option>
+                                    <option value="INTERNAL_MEDICINE">Internal Medicine</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Territory Information -->
+                        <h6 class="text-primary mb-3"><i class="bi bi-geo-alt me-2"></i>Territory Information</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">Territory ID <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="territory_id" placeholder="e.g., A1-NORTHEAST" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Region</label>
+                                <select class="form-select" name="region">
+                                    <option value="">Select region...</option>
+                                    <option value="A1">A1 - Northeast</option>
+                                    <option value="A2">A2 - Southeast</option>
+                                    <option value="A3">A3 - Midwest</option>
+                                    <option value="A4">A4 - Southwest</option>
+                                    <option value="A5">A5 - West</option>
+                                    <option value="A6">A6 - Northwest</option>
+                                    <option value="A7">A7 - Central</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Pharmacy Channel</label>
+                                <select class="form-select" name="pharmacy_channel">
+                                    <option value="">Select channel...</option>
+                                    <option value="HUB">HUB</option>
+                                    <option value="WALGREENS">Walgreens</option>
+                                    <option value="CVS">CVS</option>
+                                    <option value="ACCREDO">Accredo</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Engagement Metrics -->
+                        <h6 class="text-primary mb-3"><i class="bi bi-activity me-2"></i>Engagement Metrics</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-3">
+                                <label class="form-label">Power Score</label>
+                                <input type="number" class="form-control" name="power_score" step="0.01" min="0" max="1" placeholder="0.0 - 1.0">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Call Count</label>
+                                <input type="number" class="form-control" name="call_count" min="0" placeholder="Total calls">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Meeting Count</label>
+                                <input type="number" class="form-control" name="meeting_count" min="0" placeholder="Total meetings">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Email Count</label>
+                                <input type="number" class="form-control" name="email_count" min="0" placeholder="Emails sent">
+                            </div>
+                        </div>
+
+                        <!-- Historical Data -->
+                        <h6 class="text-primary mb-3"><i class="bi bi-clock-history me-2"></i>Historical Data</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">Previous Enrollments</label>
+                                <input type="number" class="form-control" name="prev_enrollments" min="0" placeholder="Count">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Days Since Last Contact</label>
+                                <input type="number" class="form-control" name="days_since_contact" min="0" placeholder="Days">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Writer Status</label>
+                                <select class="form-select" name="writer_status">
+                                    <option value="">Select status...</option>
+                                    <option value="NEW">New Writer</option>
+                                    <option value="REPEAT">Repeat Writer</option>
+                                    <option value="NONE">Non-Writer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="reset" class="btn btn-outline-secondary me-2">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i>Reset
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-send me-2"></i>Get Prediction
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>Prediction Result</h5>
+                </div>
+                <div class="card-body">
+                    <div id="result-placeholder" class="text-center py-5">
+                        <i class="bi bi-bullseye display-1 text-muted"></i>
+                        <p class="text-muted mt-3">Enter features and click "Get Prediction" to see results</p>
+                    </div>
+                    <div id="result-content" class="d-none">
+                        <div class="text-center mb-4">
+                            <div id="result-icon" class="display-1 mb-3"></div>
+                            <h3 id="result-label"></h3>
+                        </div>
+                        
+                        <div class="prediction-gauge mb-4">
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar" role="progressbar" id="confidence-bar" style="width: 0%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <small class="text-muted">0%</small>
+                                <strong id="confidence-value">--</strong>
+                                <small class="text-muted">100%</small>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <td><i class="bi bi-check-circle text-success me-2"></i>Enrollment Prob</td>
+                                    <td class="text-end"><strong id="prob-enroll">--</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-x-circle text-danger me-2"></i>Non-Enrollment Prob</td>
+                                    <td class="text-end"><strong id="prob-no-enroll">--</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-clock text-info me-2"></i>Prediction Time</td>
+                                    <td class="text-end"><strong id="pred-time">--</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <small>This prediction is based on historical enrollment patterns for rare disease pharmaceuticals.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `,
+    scripts: '<script src="/js/predict.js"></script>'
+}) %>

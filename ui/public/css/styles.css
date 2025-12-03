@@ -1,0 +1,430 @@
+/**
+ * Enrollment Prediction Dashboard - Custom Styles
+ */
+
+/* Root Variables */
+:root {
+    --primary-color: #0d6efd;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #0dcaf0;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+/* Body */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Stats Cards */
+.stats-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* Quick Link Cards */
+.quick-link-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.quick-link-card i {
+    transition: transform 0.2s ease;
+}
+
+.quick-link-card:hover i {
+    transform: scale(1.1);
+}
+
+/* Pipeline Steps */
+.pipeline-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 1rem 0;
+}
+
+.pipeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.pipeline-step .step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.pipeline-step.completed .step-icon {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.pipeline-step.active .step-icon {
+    background-color: var(--primary-color);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.pipeline-step .step-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-align: center;
+}
+
+.pipeline-step.completed .step-label,
+.pipeline-step.active .step-label {
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.pipeline-connector {
+    width: 30px;
+    height: 3px;
+    background-color: #e9ecef;
+    margin: 0 5px;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+    }
+}
+
+/* Upload Zone */
+.upload-zone {
+    border: 2px dashed #dee2e6;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+    border-color: var(--primary-color);
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.upload-zone.dragover {
+    transform: scale(1.02);
+}
+
+/* Prediction Result */
+.prediction-gauge .progress-bar {
+    transition: width 1s ease;
+}
+
+/* Info Items */
+.info-item {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.info-item label {
+    display: block;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.info-item h4 {
+    margin-bottom: 0;
+    color: var(--dark-color);
+}
+
+/* Metric Cards */
+.metric-card {
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Feature List */
+.feature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.feature-badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: var(--dark-color);
+    transition: all 0.2s ease;
+}
+
+.feature-badge:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Confusion Matrix */
+.confusion-matrix table {
+    max-width: 300px;
+}
+
+.confusion-matrix th,
+.confusion-matrix td {
+    width: 100px;
+    height: 60px;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+/* Correlation List */
+.correlation-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.correlation-item:last-child {
+    border-bottom: none;
+}
+
+.correlation-bar {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 1rem;
+}
+
+.correlation-bar .bar {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.correlation-bar .bar.positive {
+    background-color: var(--success-color);
+}
+
+.correlation-bar .bar.negative {
+    background-color: var(--danger-color);
+}
+
+/* Quality Issues */
+.quality-issue {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem;
+    background-color: #fff3cd;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.quality-issue.critical {
+    background-color: #f8d7da;
+}
+
+.quality-issue i {
+    margin-right: 0.75rem;
+    font-size: 1.25rem;
+}
+
+/* Tables */
+.table-responsive {
+    border-radius: 8px;
+}
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Footer */
+.footer {
+    margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pipeline-steps {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+    }
+    
+    .pipeline-connector {
+        min-width: 20px;
+    }
+    
+    .stats-card .card-body {
+        padding: 1rem;
+    }
+    
+    .icon-box {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loader */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Badge Animations */
+.badge {
+    transition: all 0.3s ease;
+}
+
+/* Card Hover Effects */
+.card {
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow);
+}
+
+/* Form Styling */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button Animations */
+.btn {
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Alert Styling */
+.alert {
+    border: none;
+    border-radius: 12px;
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* Model Comparison Table */
+#model-comparison-table tbody tr.best-model {
+    background-color: rgba(25, 135, 84, 0.1);
+    border-left: 3px solid var(--success-color);
+}
+
+#model-comparison-table .badge {
+    font-size: 0.75rem;
+}
