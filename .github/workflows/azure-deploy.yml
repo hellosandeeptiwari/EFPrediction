@@ -35,8 +35,9 @@ jobs:
         zip -r release.zip . -x "*.git*" -x "*.venv*" -x "*__pycache__*" -x "*.pyc" -x "ui/node_modules/*" -x "Reporting Tables/*" -x "*.zip" -x "logs/*" -x "antenv/*"
 
     - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v3
+      uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: 'production'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: release.zip
