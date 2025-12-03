@@ -34,9 +34,20 @@ jobs:
       run: |
         zip -r release.zip . -x "*.git*" -x "*.venv*" -x "*__pycache__*" -x "*.pyc" -x "ui/node_modules/*" -x "Reporting Tables/*" -x "*.zip" -x "logs/*" -x "antenv/*"
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: release.zip
+    - name: Deploy to Azure Web App using cURL
+      env:
+        PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+      run: |
+        # Extract credentials from publish profile
+        USERNAME=$(echo "$PUBLISH_PROFILE" | grep -o 'userName="[^"]*"' | head -1 | cut -d'"' -f2)
+        PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -o 'userPWD="[^"]*"' | head -1 | cut -d'"' -f2)
+        
+        echo "Deploying to Azure..."
+        curl -X POST \
+          -u "$USERNAME:$PASSWORD" \
+          --data-binary @release.zip \
+          "https://${{ env.AZURE_WEBAPP_NAME }}.scm.azurewebsites.net/api/zipdeploy?isAsync=true" \
+          -H "Content-Type: application/zip" \
+          -v
+        
+        echo "Deployment initiated!"
