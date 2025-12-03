@@ -8,7 +8,6 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: efprediction-app
-  PYTHON_VERSION: '3.11'
 
 jobs:
   build-and-deploy:
@@ -18,40 +17,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
-
-    - name: Install dependencies to .python_packages
-      run: |
-        pip install --target=".python_packages/lib/site-packages" -r requirements.txt
-
-    - name: Zip artifact for deployment
-      run: |
-        zip -r release.zip . -x "*.git*" -x "*.venv*" -x "*__pycache__*" -x "*.pyc" -x "ui/node_modules/*" -x "Reporting Tables/*" -x "*.zip" -x "logs/*"
-
-    - name: Deploy to Azure Web App using cURL
-      env:
-        PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-      run: |
-        # Extract credentials from publish profile
-        USERNAME=$(echo "$PUBLISH_PROFILE" | grep -o 'userName="[^"]*"' | head -1 | cut -d'"' -f2)
-        PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -o 'userPWD="[^"]*"' | head -1 | cut -d'"' -f2)
-        
-        echo "Deploying to Azure..."
-        response=$(curl -s -w "\n%{http_code}" -X POST \
-          -u "$USERNAME:$PASSWORD" \
-          --data-binary @release.zip \
-          "https://${{ env.AZURE_WEBAPP_NAME }}.scm.azurewebsites.net/api/zipdeploy" \
-          -H "Content-Type: application/zip")
-        
-        http_code=$(echo "$response" | tail -n1)
-        echo "HTTP Status: $http_code"
-        
-        if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
-          echo "Deployment successful!"
-        else
-          echo "Deployment response: $response"
-          exit 1
-        fi
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: .

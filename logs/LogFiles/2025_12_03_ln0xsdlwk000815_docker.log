@@ -1,0 +1,252 @@
+2025-12-03T11:35:30.4180753Z Container start method called.
+2025-12-03T11:35:30.4182980Z Establishing network.
+2025-12-03T11:35:30.4190144Z Pulling image: appsvc/python:3.11_20251017.5.tuxprod.
+2025-12-03T11:35:30.5833903Z Image appsvc/python:3.11_20251017.5.tuxprod is pulled from registry 10.1.0.5:13209
+2025-12-03T11:35:30.5835986Z Container is starting.
+2025-12-03T11:35:30.5849806Z Establishing user namespace if not established already.
+2025-12-03T11:35:30.5882218Z Establishing network if not established already.
+2025-12-03T11:35:30.5917503Z Mounting volumes.
+2025-12-03T11:35:30.5929368Z Nested mountpoint 
+2025-12-03T11:35:30.6110317Z Nested mountpoint volatile/logs
+2025-12-03T11:35:30.6267043Z Nested mountpoint 
+2025-12-03T11:35:30.6306186Z Nested mountpoint 
+2025-12-03T11:35:30.6549689Z Nested mountpoint 
+2025-12-03T11:35:30.7312953Z Creating container.
+2025-12-03T11:35:30.7314587Z Creating pipes for streaming container io.
+2025-12-03T11:35:30.7316024Z Creating stdout named pipe at /podr/container/pipe/4ca881bf98e1_efprediction-app/stdout_55afbd5ff6114fd481f36cd1e243e6d4.
+2025-12-03T11:35:30.7318782Z Successfully created stdout named pipe at: /podr/container/pipe/4ca881bf98e1_efprediction-app/stdout_55afbd5ff6114fd481f36cd1e243e6d4.
+2025-12-03T11:35:30.7320024Z Opening named pipe /podr/container/pipe/4ca881bf98e1_efprediction-app/stdout_55afbd5ff6114fd481f36cd1e243e6d4 for reading in non-blocking mode.
+2025-12-03T11:35:30.7321552Z Successfully opened named pipe: /podr/container/pipe/4ca881bf98e1_efprediction-app/stdout_55afbd5ff6114fd481f36cd1e243e6d4.
+2025-12-03T11:35:30.7322851Z Successfully removed non-blocking flag from /podr/container/pipe/4ca881bf98e1_efprediction-app/stdout_55afbd5ff6114fd481f36cd1e243e6d4.
+2025-12-03T11:35:30.7324230Z Creating stderr named pipe at /podr/container/pipe/4ca881bf98e1_efprediction-app/stderr_af7f7e1a144b46b28480649b8a8d20ae.
+2025-12-03T11:35:30.7326031Z Successfully created stderr named pipe at: /podr/container/pipe/4ca881bf98e1_efprediction-app/stderr_af7f7e1a144b46b28480649b8a8d20ae.
+2025-12-03T11:35:30.7327332Z Opening named pipe /podr/container/pipe/4ca881bf98e1_efprediction-app/stderr_af7f7e1a144b46b28480649b8a8d20ae for reading in non-blocking mode.
+2025-12-03T11:35:30.7328694Z Successfully opened named pipe: /podr/container/pipe/4ca881bf98e1_efprediction-app/stderr_af7f7e1a144b46b28480649b8a8d20ae.
+2025-12-03T11:35:30.7329842Z Successfully removed non-blocking flag from /podr/container/pipe/4ca881bf98e1_efprediction-app/stderr_af7f7e1a144b46b28480649b8a8d20ae.
+2025-12-03T11:35:30.7331275Z Creating container with image: appsvc/python:3.11_20251017.5.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/python:3.11_20251017.5.tuxprod
+2025-12-03T11:35:30.9895572Z Starting container: 4ca881bf98e1_efprediction-app.
+2025-12-03T11:35:31.0055720Z Starting watchers and probes.
+2025-12-03T11:35:31.0077926Z Starting metrics collection.
+2025-12-03T11:35:31.0081243Z Container is running.
+2025-12-03T11:35:32.7697696Z Container start method finished after 2349 ms.
+2025-12-03T11:35:37.9679832Z Site startup probe succeeded after 5.197364 seconds.
+2025-12-03T11:35:38.0943762Z Site started.
+2025-12-03T11:35:38.1042156Z Site is running with patch version PYTHON 3.11.14
+2025-12-03T11:36:11.6996774Z Container start method called.
+2025-12-03T11:36:11.7027993Z Establishing network.
+2025-12-03T11:36:11.7040347Z Pulling image: appsvc/python:3.11_20251017.5.tuxprod.
+2025-12-03T11:36:11.7699141Z Container is starting.
+2025-12-03T11:36:11.7701271Z Establishing user namespace if not established already.
+2025-12-03T11:36:11.7702381Z Establishing network if not established already.
+2025-12-03T11:36:11.7703687Z Mounting volumes.
+2025-12-03T11:36:11.7716712Z Nested mountpoint 
+2025-12-03T11:36:11.7744812Z Nested mountpoint volatile/logs
+2025-12-03T11:36:11.7775788Z Nested mountpoint 
+2025-12-03T11:36:11.7785234Z Nested mountpoint 
+2025-12-03T11:36:11.7874320Z Nested mountpoint 
+2025-12-03T11:36:11.8321082Z Creating container.
+2025-12-03T11:36:11.8322361Z Creating pipes for streaming container io.
+2025-12-03T11:36:11.8323606Z Creating stdout named pipe at /podr/container/pipe/c6c06529b59f_efprediction-app/stdout_39476fe73f4d4ce5be05b6d0b98953a9.
+2025-12-03T11:36:11.8339178Z Successfully created stdout named pipe at: /podr/container/pipe/c6c06529b59f_efprediction-app/stdout_39476fe73f4d4ce5be05b6d0b98953a9.
+2025-12-03T11:36:11.8340612Z Opening named pipe /podr/container/pipe/c6c06529b59f_efprediction-app/stdout_39476fe73f4d4ce5be05b6d0b98953a9 for reading in non-blocking mode.
+2025-12-03T11:36:11.8342149Z Successfully opened named pipe: /podr/container/pipe/c6c06529b59f_efprediction-app/stdout_39476fe73f4d4ce5be05b6d0b98953a9.
+2025-12-03T11:36:11.8343351Z Successfully removed non-blocking flag from /podr/container/pipe/c6c06529b59f_efprediction-app/stdout_39476fe73f4d4ce5be05b6d0b98953a9.
+2025-12-03T11:36:11.8344664Z Creating stderr named pipe at /podr/container/pipe/c6c06529b59f_efprediction-app/stderr_a4455f96e4b64cee9f481f346984ee9c.
+2025-12-03T11:36:11.8346945Z Successfully created stderr named pipe at: /podr/container/pipe/c6c06529b59f_efprediction-app/stderr_a4455f96e4b64cee9f481f346984ee9c.
+2025-12-03T11:36:11.8348083Z Opening named pipe /podr/container/pipe/c6c06529b59f_efprediction-app/stderr_a4455f96e4b64cee9f481f346984ee9c for reading in non-blocking mode.
+2025-12-03T11:36:11.8349286Z Successfully opened named pipe: /podr/container/pipe/c6c06529b59f_efprediction-app/stderr_a4455f96e4b64cee9f481f346984ee9c.
+2025-12-03T11:36:11.8350308Z Successfully removed non-blocking flag from /podr/container/pipe/c6c06529b59f_efprediction-app/stderr_a4455f96e4b64cee9f481f346984ee9c.
+2025-12-03T11:36:11.8351385Z Creating container with image: appsvc/python:3.11_20251017.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20251017.5.tuxprod
+2025-12-03T11:36:12.0355551Z Starting container: c6c06529b59f_efprediction-app.
+2025-12-03T11:36:12.0541089Z Starting watchers and probes.
+2025-12-03T11:36:12.0543181Z Starting metrics collection.
+2025-12-03T11:36:12.0551584Z Container is running.
+2025-12-03T11:36:12.0679609Z Container start method finished after 366 ms.
+2025-12-03T11:36:17.5415961Z Container has finished running with exit code: 3.
+2025-12-03T11:36:17.5448461Z Container is terminating. Grace period: 5 seconds.
+2025-12-03T11:36:17.5495087Z Stop and delete container. Retry count = 0
+2025-12-03T11:36:17.5503251Z Stopping container: c6c06529b59f_efprediction-app.
+2025-12-03T11:36:17.5715944Z Deleting container: c6c06529b59f_efprediction-app. Retry count = 0
+2025-12-03T11:36:17.6562890Z Container spec TerminationMessagePolicy  path 
+2025-12-03T11:36:17.6589769Z Container is terminated. Total time elapsed: 112 ms.
+2025-12-03T11:36:17.6592510Z Site container: efprediction-app terminated during site startup.
+2025-12-03T11:36:17.6650409Z Site startup probe failed after 5.5951172 seconds.
+2025-12-03T11:36:17.7317440Z Failed to start site. Revert by stopping site.
+2025-12-03T11:36:17.7410121Z Site: efprediction-app stopped.
+2025-12-03T11:36:37.9614239Z Container is terminating. Grace period: 5 seconds.
+2025-12-03T11:36:37.9746764Z Stop and delete container. Retry count = 0
+2025-12-03T11:36:37.9748307Z Stopping container: 4ca881bf98e1_efprediction-app.
+2025-12-03T11:36:43.0100593Z Deleting container: 4ca881bf98e1_efprediction-app. Retry count = 0
+2025-12-03T11:36:43.0773561Z Container spec TerminationMessagePolicy  path 
+2025-12-03T11:36:43.0787401Z Container is terminated. Total time elapsed: 5117 ms.
+2025-12-03T11:36:43.0794318Z Site: efprediction-app stopped.
+2025-12-03T11:39:45.3744542Z Container start method called.
+2025-12-03T11:39:45.3746349Z Establishing network.
+2025-12-03T11:39:45.3747679Z Pulling image: appsvc/python:3.11_20251017.5.tuxprod.
+2025-12-03T11:39:45.4706796Z Container is starting.
+2025-12-03T11:39:45.4709079Z Establishing user namespace if not established already.
+2025-12-03T11:39:45.4710492Z Establishing network if not established already.
+2025-12-03T11:39:45.4712081Z Mounting volumes.
+2025-12-03T11:39:45.4714210Z Nested mountpoint 
+2025-12-03T11:39:45.4747605Z Nested mountpoint volatile/logs
+2025-12-03T11:39:45.4801028Z Nested mountpoint 
+2025-12-03T11:39:45.4822733Z Nested mountpoint 
+2025-12-03T11:39:45.4852997Z Nested mountpoint 
+2025-12-03T11:39:45.5563704Z Creating container.
+2025-12-03T11:39:45.5564976Z Creating pipes for streaming container io.
+2025-12-03T11:39:45.5566057Z Creating stdout named pipe at /podr/container/pipe/f362a97dc62a_efprediction-app/stdout_911e93d798334cf49cfaaff47f5a2e28.
+2025-12-03T11:39:45.5576584Z Successfully created stdout named pipe at: /podr/container/pipe/f362a97dc62a_efprediction-app/stdout_911e93d798334cf49cfaaff47f5a2e28.
+2025-12-03T11:39:45.5579386Z Opening named pipe /podr/container/pipe/f362a97dc62a_efprediction-app/stdout_911e93d798334cf49cfaaff47f5a2e28 for reading in non-blocking mode.
+2025-12-03T11:39:45.5582886Z Successfully opened named pipe: /podr/container/pipe/f362a97dc62a_efprediction-app/stdout_911e93d798334cf49cfaaff47f5a2e28.
+2025-12-03T11:39:45.5587833Z Successfully removed non-blocking flag from /podr/container/pipe/f362a97dc62a_efprediction-app/stdout_911e93d798334cf49cfaaff47f5a2e28.
+2025-12-03T11:39:45.5589639Z Creating stderr named pipe at /podr/container/pipe/f362a97dc62a_efprediction-app/stderr_5df2320a3aac408aa8d81834d5d4b624.
+2025-12-03T11:39:45.5594517Z Successfully created stderr named pipe at: /podr/container/pipe/f362a97dc62a_efprediction-app/stderr_5df2320a3aac408aa8d81834d5d4b624.
+2025-12-03T11:39:45.5596454Z Opening named pipe /podr/container/pipe/f362a97dc62a_efprediction-app/stderr_5df2320a3aac408aa8d81834d5d4b624 for reading in non-blocking mode.
+2025-12-03T11:39:45.5601240Z Successfully opened named pipe: /podr/container/pipe/f362a97dc62a_efprediction-app/stderr_5df2320a3aac408aa8d81834d5d4b624.
+2025-12-03T11:39:45.5603026Z Successfully removed non-blocking flag from /podr/container/pipe/f362a97dc62a_efprediction-app/stderr_5df2320a3aac408aa8d81834d5d4b624.
+2025-12-03T11:39:45.5607362Z Creating container with image: appsvc/python:3.11_20251017.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20251017.5.tuxprod
+2025-12-03T11:39:45.7264736Z Starting container: f362a97dc62a_efprediction-app.
+2025-12-03T11:39:45.7497018Z Starting watchers and probes.
+2025-12-03T11:39:45.7543221Z Starting metrics collection.
+2025-12-03T11:39:45.7549308Z Container is running.
+2025-12-03T11:39:45.7867144Z Container start method finished after 411 ms.
+2025-12-03T11:39:51.7458458Z Container has finished running with exit code: 3.
+2025-12-03T11:39:51.7459875Z Container is terminating. Grace period: 5 seconds.
+2025-12-03T11:39:51.7462470Z Stop and delete container. Retry count = 0
+2025-12-03T11:39:51.7463514Z Stopping container: f362a97dc62a_efprediction-app.
+2025-12-03T11:39:51.8514746Z Deleting container: f362a97dc62a_efprediction-app. Retry count = 0
+2025-12-03T11:39:51.9186791Z Container spec TerminationMessagePolicy  path 
+2025-12-03T11:39:51.9191088Z Container is terminated. Total time elapsed: 172 ms.
+2025-12-03T11:39:51.9192947Z Site container: efprediction-app terminated during site startup.
+2025-12-03T11:39:51.9207699Z Site startup probe failed after 6.1321652 seconds.
+2025-12-03T11:39:52.0169526Z Failed to start site. Revert by stopping site.
+2025-12-03T11:39:52.0187738Z Site: efprediction-app stopped.
+2025-12-03T11:39:52.2056546Z Site: efprediction-app will be blocked for 1 minutes till 12/03/2025 11:40:52
+2025-12-03T11:40:52.2068419Z Site: efprediction-app is unblocked.
+2025-12-03T11:41:19.3137878Z Container start method called.
+2025-12-03T11:41:19.3139944Z Establishing network.
+2025-12-03T11:41:19.3141482Z Pulling image: appsvc/python:3.11_20251017.5.tuxprod.
+2025-12-03T11:41:19.4028863Z Container is starting.
+2025-12-03T11:41:19.4031009Z Establishing user namespace if not established already.
+2025-12-03T11:41:19.4032280Z Establishing network if not established already.
+2025-12-03T11:41:19.4033848Z Mounting volumes.
+2025-12-03T11:41:19.4036429Z Nested mountpoint 
+2025-12-03T11:41:19.4053667Z Nested mountpoint volatile/logs
+2025-12-03T11:41:19.4134014Z Nested mountpoint 
+2025-12-03T11:41:19.4145720Z Nested mountpoint 
+2025-12-03T11:41:19.4160079Z Nested mountpoint 
+2025-12-03T11:41:19.4756420Z Creating container.
+2025-12-03T11:41:19.4757509Z Creating pipes for streaming container io.
+2025-12-03T11:41:19.4758576Z Creating stdout named pipe at /podr/container/pipe/d80e188d0691_efprediction-app/stdout_c8b4ec4d607743f5aefa69ae9550dcc0.
+2025-12-03T11:41:19.4760869Z Successfully created stdout named pipe at: /podr/container/pipe/d80e188d0691_efprediction-app/stdout_c8b4ec4d607743f5aefa69ae9550dcc0.
+2025-12-03T11:41:19.4761920Z Opening named pipe /podr/container/pipe/d80e188d0691_efprediction-app/stdout_c8b4ec4d607743f5aefa69ae9550dcc0 for reading in non-blocking mode.
+2025-12-03T11:41:19.4763332Z Successfully opened named pipe: /podr/container/pipe/d80e188d0691_efprediction-app/stdout_c8b4ec4d607743f5aefa69ae9550dcc0.
+2025-12-03T11:41:19.4764323Z Successfully removed non-blocking flag from /podr/container/pipe/d80e188d0691_efprediction-app/stdout_c8b4ec4d607743f5aefa69ae9550dcc0.
+2025-12-03T11:41:19.4765283Z Creating stderr named pipe at /podr/container/pipe/d80e188d0691_efprediction-app/stderr_5d4837674c2746dea1113fee8fc6ec48.
+2025-12-03T11:41:19.4766936Z Successfully created stderr named pipe at: /podr/container/pipe/d80e188d0691_efprediction-app/stderr_5d4837674c2746dea1113fee8fc6ec48.
+2025-12-03T11:41:19.4803819Z Opening named pipe /podr/container/pipe/d80e188d0691_efprediction-app/stderr_5d4837674c2746dea1113fee8fc6ec48 for reading in non-blocking mode.
+2025-12-03T11:41:19.4805872Z Successfully opened named pipe: /podr/container/pipe/d80e188d0691_efprediction-app/stderr_5d4837674c2746dea1113fee8fc6ec48.
+2025-12-03T11:41:19.4812212Z Successfully removed non-blocking flag from /podr/container/pipe/d80e188d0691_efprediction-app/stderr_5d4837674c2746dea1113fee8fc6ec48.
+2025-12-03T11:41:19.4813541Z Creating container with image: appsvc/python:3.11_20251017.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20251017.5.tuxprod
+2025-12-03T11:41:19.6405510Z Starting container: d80e188d0691_efprediction-app.
+2025-12-03T11:41:19.6609836Z Starting watchers and probes.
+2025-12-03T11:41:19.6611961Z Starting metrics collection.
+2025-12-03T11:41:19.6613332Z Container is running.
+2025-12-03T11:41:19.6797651Z Container start method finished after 365 ms.
+2025-12-03T11:41:25.2060649Z Container has finished running with exit code: 3.
+2025-12-03T11:41:25.2062025Z Container is terminating. Grace period: 5 seconds.
+2025-12-03T11:41:25.2071548Z Stop and delete container. Retry count = 0
+2025-12-03T11:41:25.2076923Z Stopping container: d80e188d0691_efprediction-app.
+2025-12-03T11:41:25.4574090Z Deleting container: d80e188d0691_efprediction-app. Retry count = 0
+2025-12-03T11:41:25.8967980Z Container spec TerminationMessagePolicy  path 
+2025-12-03T11:41:25.8973308Z Container is terminated. Total time elapsed: 690 ms.
+2025-12-03T11:41:25.8975310Z Site container: efprediction-app terminated during site startup.
+2025-12-03T11:41:25.9002763Z Site startup probe failed after 6.2199584 seconds.
+2025-12-03T11:41:25.9724816Z Failed to start site. Revert by stopping site.
+2025-12-03T11:41:25.9728518Z Site: efprediction-app stopped.
+2025-12-03T11:41:26.1328096Z Site: efprediction-app will be blocked for 1 minutes till 12/03/2025 11:42:26
+2025-12-03T11:42:26.1331486Z Site: efprediction-app is unblocked.
+2025-12-03T11:46:19.8239335Z Container start method called.
+2025-12-03T11:46:19.8253561Z Establishing network.
+2025-12-03T11:46:19.8257153Z Pulling image: appsvc/python:3.11_20251017.5.tuxprod.
+2025-12-03T11:46:19.8976354Z Container is starting.
+2025-12-03T11:46:19.8978437Z Establishing user namespace if not established already.
+2025-12-03T11:46:19.8979776Z Establishing network if not established already.
+2025-12-03T11:46:19.8981233Z Mounting volumes.
+2025-12-03T11:46:19.8983201Z Nested mountpoint 
+2025-12-03T11:46:19.8991279Z Nested mountpoint volatile/logs
+2025-12-03T11:46:19.9034891Z Nested mountpoint 
+2025-12-03T11:46:19.9041802Z Nested mountpoint 
+2025-12-03T11:46:19.9092439Z Nested mountpoint 
+2025-12-03T11:46:19.9771723Z Creating container.
+2025-12-03T11:46:19.9773441Z Creating pipes for streaming container io.
+2025-12-03T11:46:19.9775053Z Creating stdout named pipe at /podr/container/pipe/9c7633dadf8d_efprediction-app/stdout_cda0b1d70874472883262ff7037d5978.
+2025-12-03T11:46:19.9776951Z Successfully created stdout named pipe at: /podr/container/pipe/9c7633dadf8d_efprediction-app/stdout_cda0b1d70874472883262ff7037d5978.
+2025-12-03T11:46:19.9777968Z Opening named pipe /podr/container/pipe/9c7633dadf8d_efprediction-app/stdout_cda0b1d70874472883262ff7037d5978 for reading in non-blocking mode.
+2025-12-03T11:46:19.9779256Z Successfully opened named pipe: /podr/container/pipe/9c7633dadf8d_efprediction-app/stdout_cda0b1d70874472883262ff7037d5978.
+2025-12-03T11:46:19.9780384Z Successfully removed non-blocking flag from /podr/container/pipe/9c7633dadf8d_efprediction-app/stdout_cda0b1d70874472883262ff7037d5978.
+2025-12-03T11:46:19.9781469Z Creating stderr named pipe at /podr/container/pipe/9c7633dadf8d_efprediction-app/stderr_0a8851a3353c431497923c01e9560a4f.
+2025-12-03T11:46:19.9782864Z Successfully created stderr named pipe at: /podr/container/pipe/9c7633dadf8d_efprediction-app/stderr_0a8851a3353c431497923c01e9560a4f.
+2025-12-03T11:46:19.9783771Z Opening named pipe /podr/container/pipe/9c7633dadf8d_efprediction-app/stderr_0a8851a3353c431497923c01e9560a4f for reading in non-blocking mode.
+2025-12-03T11:46:19.9784925Z Successfully opened named pipe: /podr/container/pipe/9c7633dadf8d_efprediction-app/stderr_0a8851a3353c431497923c01e9560a4f.
+2025-12-03T11:46:19.9785852Z Successfully removed non-blocking flag from /podr/container/pipe/9c7633dadf8d_efprediction-app/stderr_0a8851a3353c431497923c01e9560a4f.
+2025-12-03T11:46:19.9787114Z Creating container with image: appsvc/python:3.11_20251017.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20251017.5.tuxprod
+2025-12-03T11:46:20.1804002Z Starting container: 9c7633dadf8d_efprediction-app.
+2025-12-03T11:46:20.2088430Z Starting watchers and probes.
+2025-12-03T11:46:20.2091829Z Starting metrics collection.
+2025-12-03T11:46:20.2097284Z Container is running.
+2025-12-03T11:46:20.2322059Z Container start method finished after 407 ms.
+2025-12-03T11:46:26.2249353Z Container has finished running with exit code: 3.
+2025-12-03T11:46:26.2250694Z Container is terminating. Grace period: 5 seconds.
+2025-12-03T11:46:26.2275519Z Stop and delete container. Retry count = 0
+2025-12-03T11:46:26.2296108Z Stopping container: 9c7633dadf8d_efprediction-app.
+2025-12-03T11:46:26.2523659Z Deleting container: 9c7633dadf8d_efprediction-app. Retry count = 0
+2025-12-03T11:46:26.3437130Z Container spec TerminationMessagePolicy  path 
+2025-12-03T11:46:26.3439626Z Container is terminated. Total time elapsed: 118 ms.
+2025-12-03T11:46:26.3440833Z Site container: efprediction-app terminated during site startup.
+2025-12-03T11:46:26.3462667Z Site startup probe failed after 6.1134992 seconds.
+2025-12-03T11:46:26.4186333Z Failed to start site. Revert by stopping site.
+2025-12-03T11:46:26.4241311Z Site: efprediction-app stopped.
+2025-12-03T11:46:26.5946363Z Site: efprediction-app will be blocked for 2 minutes till 12/03/2025 11:48:26
+2025-12-03T11:48:26.5991385Z Site: efprediction-app is unblocked.
+2025-12-03T11:51:21.0631698Z Container start method called.
+2025-12-03T11:51:21.0633374Z Establishing network.
+2025-12-03T11:51:21.0642875Z Pulling image: appsvc/python:3.11_20251017.5.tuxprod.
+2025-12-03T11:51:21.1408480Z Container is starting.
+2025-12-03T11:51:21.1420732Z Establishing user namespace if not established already.
+2025-12-03T11:51:21.1422386Z Establishing network if not established already.
+2025-12-03T11:51:21.1430803Z Mounting volumes.
+2025-12-03T11:51:21.1437415Z Nested mountpoint 
+2025-12-03T11:51:21.1531991Z Nested mountpoint volatile/logs
+2025-12-03T11:51:21.1612650Z Nested mountpoint 
+2025-12-03T11:51:21.1669406Z Nested mountpoint 
+2025-12-03T11:51:21.1688372Z Nested mountpoint 
+2025-12-03T11:51:21.2803211Z Creating container.
+2025-12-03T11:51:21.2804496Z Creating pipes for streaming container io.
+2025-12-03T11:51:21.2805674Z Creating stdout named pipe at /podr/container/pipe/85f8312d2835_efprediction-app/stdout_ace9aa4ffc55424088a75bce3a3b369a.
+2025-12-03T11:51:21.2808021Z Successfully created stdout named pipe at: /podr/container/pipe/85f8312d2835_efprediction-app/stdout_ace9aa4ffc55424088a75bce3a3b369a.
+2025-12-03T11:51:21.2809073Z Opening named pipe /podr/container/pipe/85f8312d2835_efprediction-app/stdout_ace9aa4ffc55424088a75bce3a3b369a for reading in non-blocking mode.
+2025-12-03T11:51:21.2810303Z Successfully opened named pipe: /podr/container/pipe/85f8312d2835_efprediction-app/stdout_ace9aa4ffc55424088a75bce3a3b369a.
+2025-12-03T11:51:21.2811453Z Successfully removed non-blocking flag from /podr/container/pipe/85f8312d2835_efprediction-app/stdout_ace9aa4ffc55424088a75bce3a3b369a.
+2025-12-03T11:51:21.2812596Z Creating stderr named pipe at /podr/container/pipe/85f8312d2835_efprediction-app/stderr_90034f0d9131422b8d8883cb15e92a42.
+2025-12-03T11:51:21.2814782Z Successfully created stderr named pipe at: /podr/container/pipe/85f8312d2835_efprediction-app/stderr_90034f0d9131422b8d8883cb15e92a42.
+2025-12-03T11:51:21.2816067Z Opening named pipe /podr/container/pipe/85f8312d2835_efprediction-app/stderr_90034f0d9131422b8d8883cb15e92a42 for reading in non-blocking mode.
+2025-12-03T11:51:21.2817294Z Successfully opened named pipe: /podr/container/pipe/85f8312d2835_efprediction-app/stderr_90034f0d9131422b8d8883cb15e92a42.
+2025-12-03T11:51:21.2818275Z Successfully removed non-blocking flag from /podr/container/pipe/85f8312d2835_efprediction-app/stderr_90034f0d9131422b8d8883cb15e92a42.
+2025-12-03T11:51:21.2819587Z Creating container with image: appsvc/python:3.11_20251017.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20251017.5.tuxprod
+2025-12-03T11:51:21.4160320Z Starting container: 85f8312d2835_efprediction-app.
+2025-12-03T11:51:21.4418429Z Starting watchers and probes.
+2025-12-03T11:51:21.4431634Z Starting metrics collection.
+2025-12-03T11:51:21.4449161Z Container is running.
+2025-12-03T11:51:21.4903521Z Container start method finished after 426 ms.
+2025-12-03T11:51:27.2004806Z Container has finished running with exit code: 3.
+2025-12-03T11:51:27.2006246Z Container is terminating. Grace period: 5 seconds.
+2025-12-03T11:51:27.2009271Z Stop and delete container. Retry count = 0
+2025-12-03T11:51:27.2010471Z Stopping container: 85f8312d2835_efprediction-app.
+2025-12-03T11:51:27.2147146Z Deleting container: 85f8312d2835_efprediction-app. Retry count = 0
+2025-12-03T11:51:27.2982026Z Container spec TerminationMessagePolicy  path 
+2025-12-03T11:51:27.2985291Z Container is terminated. Total time elapsed: 97 ms.
+2025-12-03T11:51:27.2990838Z Site container: efprediction-app terminated during site startup.
+2025-12-03T11:51:27.3067811Z Site startup probe failed after 5.8135756 seconds.
+2025-12-03T11:51:27.3998257Z Failed to start site. Revert by stopping site.
+2025-12-03T11:51:27.4029752Z Site: efprediction-app stopped.

@@ -28,14 +28,34 @@ _model = None
 _selected_features = None
 _predictions_df = None
 _features_df = None
+_merged_df = None
 _resources_loaded = False
 
-def get_predictions_df():
-    """Lazy load predictions dataframe"""
-    global _predictions_df, _resources_loaded
+def get_features_df():
+    """Lazy load features dataframe"""
+    global _features_df
     
-    if _predictions_df is not None:
-        return _predictions_df
+    if _features_df is not None:
+        return _features_df
+    
+    try:
+        import pandas as pd
+        
+        if os.path.exists(FEATURES_PATH):
+            _features_df = pd.read_csv(FEATURES_PATH)
+            print(f"Loaded features: {len(_features_df)} records")
+            return _features_df
+    except Exception as e:
+        print(f"Error loading features: {e}")
+    
+    return None
+
+def get_predictions_df():
+    """Lazy load predictions dataframe merged with features"""
+    global _predictions_df, _merged_df
+    
+    if _merged_df is not None:
+        return _merged_df
     
     try:
         import pandas as pd
@@ -46,6 +66,18 @@ def get_predictions_df():
                 latest_pred = sorted(pred_files)[-1]
                 _predictions_df = pd.read_csv(os.path.join(PREDICTIONS_PATH, latest_pred))
                 print(f"Loaded predictions from {latest_pred}")
+                
+                # Merge with features to get HCP details
+                features_df = get_features_df()
+                if features_df is not None and len(_predictions_df) == len(features_df):
+                    # Align by index
+                    _merged_df = pd.concat([
+                        features_df[['hcp_id', 'hcp_segment', 'territory_name', 'region_name', 'power_score']].reset_index(drop=True),
+                        _predictions_df.reset_index(drop=True)
+                    ], axis=1)
+                    print(f"Merged predictions with features: {len(_merged_df)} records")
+                    return _merged_df
+                
                 return _predictions_df
     except Exception as e:
         print(f"Error loading predictions: {e}")
@@ -162,11 +194,11 @@ DASHBOARD_CONTENT = '''
     <div class="card-header"><i class="bi bi-funnel me-2"></i>Filters</div>
     <div class="card-body">
         <div class="row g-3">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label">Min Probability</label>
                 <input type="number" class="form-control" id="minProb" min="0" max="100" value="0" step="5">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label">Risk Tier</label>
                 <select class="form-select" id="riskTier">
                     <option value="">All</option>
@@ -175,16 +207,29 @@ DASHBOARD_CONTENT = '''
                     <option value="Low">Low</option>
                 </select>
             </div>
+            <div class="col-md-2">
+                <label class="form-label">HCP Segment</label>
+                <select class="form-select" id="hcpSegment">
+                    <option value="">All</option>
+                    <option value="High Value">High Value</option>
+                    <option value="Medium Value">Medium Value</option>
+                    <option value="Low Value">Low Value</option>
+                </select>
+            </div>
             <div class="col-md-3">
-                <label class="form-label">Results per page</label>
+                <label class="form-label">Search HCP ID / Territory</label>
+                <input type="text" class="form-control" id="searchText" placeholder="Search...">
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">Per Page</label>
                 <select class="form-select" id="pageSize">
                     <option value="25">25</option>
                     <option value="50" selected>50</option>
                     <option value="100">100</option>
                 </select>
             </div>
-            <div class="col-md-3 d-flex align-items-end">
-                <button class="btn btn-primary w-100" onclick="loadPredictions()"><i class="bi bi-search me-2"></i>Apply Filters</button>
+            <div class="col-md-2 d-flex align-items-end">
+                <button class="btn btn-primary w-100" onclick="loadPredictions()"><i class="bi bi-search me-2"></i>Apply</button>
             </div>
         </div>
     </div>
@@ -201,14 +246,16 @@ DASHBOARD_CONTENT = '''
             <thead class="table-light sticky-top">
                 <tr>
                     <th>HCP ID</th>
+                    <th>HCP Segment</th>
+                    <th>Territory</th>
+                    <th>Region</th>
+                    <th>Power Score</th>
                     <th>Probability <i class="bi bi-info-circle tooltip-icon" title="Model confidence score (0-100%)"></i></th>
                     <th>Risk Tier</th>
-                    <th>Segment</th>
-                    <th>Region</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <tr><td colspan="5" class="text-center">Loading...</td></tr>
+                <tr><td colspan="7" class="text-center">Loading...</td></tr>
             </tbody>
         </table>
     </div>
@@ -228,6 +275,8 @@ let totalPages = 1;
 async function loadPredictions() {
     const minProb = document.getElementById('minProb').value / 100;
     const riskTier = document.getElementById('riskTier').value;
+    const hcpSegment = document.getElementById('hcpSegment').value;
+    const searchText = document.getElementById('searchText').value;
     const pageSize = document.getElementById('pageSize').value;
     
     try {
@@ -237,6 +286,8 @@ async function loadPredictions() {
             min_probability: minProb
         });
         if (riskTier) params.append('risk_tier', riskTier);
+        if (hcpSegment) params.append('hcp_segment', hcpSegment);
+        if (searchText) params.append('search', searchText);
         
         const response = await fetch(`/api/hcp-predictions?${params}`);
         const data = await response.json();
@@ -250,7 +301,7 @@ async function loadPredictions() {
         }
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById('tableBody').innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error loading data</td></tr>';
+        document.getElementById('tableBody').innerHTML = '<tr><td colspan="7" class="text-center text-danger">Error loading data</td></tr>';
     }
 }
 
@@ -264,7 +315,7 @@ function updateSummary(summary) {
 function renderTable(predictions) {
     const tbody = document.getElementById('tableBody');
     if (!predictions.length) {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center">No results found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center">No results found</td></tr>';
         return;
     }
     
@@ -272,9 +323,14 @@ function renderTable(predictions) {
         const prob = p.probability || p.enrollment_probability || 0;
         const probPct = (prob * 100).toFixed(1);
         const tierClass = p.risk_tier === 'Very High' || p.risk_tier === 'High' ? 'badge-high' : p.risk_tier === 'Medium' ? 'badge-medium' : 'badge-low';
+        const powerScore = p.power_score !== undefined ? p.power_score.toFixed(2) : '-';
         return `
         <tr>
             <td><strong>${p.hcp_id || p.professional_id__c || 'N/A'}</strong></td>
+            <td>${p.hcp_segment || '-'}</td>
+            <td>${p.territory_name || '-'}</td>
+            <td>${p.region_name || '-'}</td>
+            <td>${powerScore}</td>
             <td>
                 <div class="progress" style="height: 20px;">
                     <div class="progress-bar ${prob >= 0.7 ? 'bg-success' : prob >= 0.4 ? 'bg-warning' : 'bg-danger'}" 
@@ -284,8 +340,6 @@ function renderTable(predictions) {
                 </div>
             </td>
             <td><span class="badge ${tierClass}">${p.risk_tier || 'N/A'}</span></td>
-            <td>${p.segment || p.prediction_label || 'N/A'}</td>
-            <td>${p.region || '-'}</td>
         </tr>
     `}).join('');
 }
@@ -514,6 +568,8 @@ def get_hcp_predictions():
         per_page = int(request.args.get('per_page', 50))
         min_probability = float(request.args.get('min_probability', 0))
         risk_tier = request.args.get('risk_tier', '')
+        hcp_segment = request.args.get('hcp_segment', '')
+        search_text = request.args.get('search', '')
         
         # Work with predictions
         df = predictions_df.copy()
@@ -527,6 +583,20 @@ def get_hcp_predictions():
         
         if risk_tier and 'risk_tier' in df.columns:
             df = df[df['risk_tier'] == risk_tier]
+        
+        if hcp_segment and 'hcp_segment' in df.columns:
+            df = df[df['hcp_segment'] == hcp_segment]
+        
+        if search_text:
+            search_text = search_text.lower()
+            mask = pd.Series([False] * len(df))
+            if 'hcp_id' in df.columns:
+                mask = mask | df['hcp_id'].astype(str).str.lower().str.contains(search_text, na=False)
+            if 'territory_name' in df.columns:
+                mask = mask | df['territory_name'].astype(str).str.lower().str.contains(search_text, na=False)
+            if 'region_name' in df.columns:
+                mask = mask | df['region_name'].astype(str).str.lower().str.contains(search_text, na=False)
+            df = df[mask]
         
         # Sort by probability descending
         if prob_col in df.columns:

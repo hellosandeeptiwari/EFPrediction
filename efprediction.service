@@ -1,0 +1,13 @@
+[Unit]
+Description=EF Prediction App Service
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/home/site/wwwroot
+Environment="PATH=/home/site/wwwroot/.python_packages/lib/site-packages"
+ExecStart=/opt/python/3.11.0/bin/gunicorn --bind=0.0.0.0:8000 --timeout 600 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
